@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Namra Kidwai — HR Professional</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F6F4FB;
+    --ink:#2B2440;
+    --ink-soft:#6E6685;
+    --ink-faint:#9A93B0;
+    --violet:#A78BFA;
+    --pink:#F49AC2;
+    --mint:#8FE3C2;
+    --sky:#9CCBFF;
+    --glass:rgba(255,255,255,0.6);
+    --glass-strong:rgba(255,255,255,0.82);
+    --glass-border:rgba(255,255,255,0.75);
+    --max:1160px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} }
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    position:relative;
+    overflow-x:hidden;
+  }
+  a{color:inherit; text-decoration:none;}
+  h1,h2,h3{font-family:'Outfit',sans-serif; margin:0; color:var(--ink);}
+
+  /* ambient gradient blobs */
+  .blob{position:fixed; border-radius:50%; filter:blur(70px); z-index:0; pointer-events:none; opacity:.55;}
+  .blob.b1{width:520px; height:520px; top:-140px; right:-120px; background:radial-gradient(circle, var(--violet), transparent 70%); animation:drift1 16s ease-in-out infinite alternate;}
+  .blob.b2{width:460px; height:460px; bottom:-100px; left:-140px; background:radial-gradient(circle, var(--sky), transparent 70%); animation:drift2 18s ease-in-out infinite alternate;}
+  .blob.b3{width:380px; height:380px; top:45%; left:55%; background:radial-gradient(circle, var(--pink), transparent 70%); animation:drift3 20s ease-in-out infinite alternate;}
+  @keyframes drift1{ from{transform:translate(0,0);} to{transform:translate(-50px,40px);} }
+  @keyframes drift2{ from{transform:translate(0,0);} to{transform:translate(40px,-30px);} }
+  @keyframes drift3{ from{transform:translate(0,0) scale(1);} to{transform:translate(-30px,30px) scale(1.1);} }
+  @media (prefers-reduced-motion: reduce){ .blob{animation:none;} }
+
+  .wrap{position:relative; z-index:1; max-width:var(--max); margin:0 auto; padding:0 32px;}
+
+  /* floating pill nav */
+  header{position:sticky; top:18px; z-index:20; display:flex; justify-content:center; padding:0 20px;}
+  .navpill{
+    max-width:var(--max); width:100%;
+    background:var(--glass-strong); backdrop-filter:blur(16px);
+    border:1px solid var(--glass-border); border-radius:999px;
+    padding:12px 26px; display:flex; justify-content:space-between; align-items:center;
+    box-shadow:0 8px 30px rgba(107,70,193,.12);
+  }
+  .logo{font-family:'Outfit',sans-serif; font-weight:700; font-size:1.02rem;}
+  nav.links{display:flex; gap:26px;}
+  nav.links a{font-size:0.88rem; color:var(--ink-soft); font-weight:500; transition:color .15s ease;}
+  nav.links a:hover{color:var(--violet);}
+  @media (max-width:760px){ nav.links{display:none;} }
+
+  /* HERO */
+  .hero{padding:76px 0 60px; display:grid; grid-template-columns:1.05fr 1fr; gap:56px; align-items:center;}
+  @media (max-width:900px){ .hero{grid-template-columns:1fr; padding:48px 0 30px;} }
+  .kicker{
+    display:inline-block; font-size:0.82rem; font-weight:600; color:var(--violet);
+    background:rgba(167,139,250,.12); padding:7px 16px; border-radius:999px; margin-bottom:20px;
+  }
+  h1.headline{font-size:2.9rem; line-height:1.15; font-weight:700; letter-spacing:-0.01em; margin-bottom:20px;}
+  h1.headline .accent{
+    background:linear-gradient(120deg, var(--violet), var(--pink));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  @media (max-width:900px){ h1.headline{font-size:2.1rem;} }
+  .hero p.sub{color:var(--ink-soft); font-size:1.04rem; max-width:48ch; margin:0 0 30px;}
+  .hero-ctas{display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{font-family:'Outfit',sans-serif; font-weight:600; font-size:0.92rem; padding:13px 26px; border-radius:999px; display:inline-flex; align-items:center; gap:8px; transition:transform .15s ease, box-shadow .15s ease;}
+  .btn.primary{background:linear-gradient(120deg, var(--violet), var(--pink)); color:#fff; box-shadow:0 10px 30px -8px rgba(167,139,250,.55);}
+  .btn.primary:hover{transform:translateY(-2px); box-shadow:0 14px 34px -8px rgba(167,139,250,.65);}
+  .btn.ghost{background:var(--glass-strong); border:1px solid var(--glass-border); color:var(--ink);}
+  .btn.ghost:hover{transform:translateY(-2px);}
+
+  /* glass profile card */
+  .profile-wrap{position:relative; display:flex; justify-content:center;}
+  .profile-card{
+    position:relative; z-index:2;
+    background:var(--glass-strong); backdrop-filter:blur(20px);
+    border:1px solid var(--glass-border); border-radius:28px;
+    padding:36px 32px; width:100%; max-width:330px; text-align:center;
+    box-shadow:0 30px 60px -20px rgba(107,70,193,.3);
+  }
+  .avatar-ring{
+    width:88px; height:88px; border-radius:50%; margin:0 auto 18px;
+    background:linear-gradient(135deg, var(--violet), var(--pink), var(--sky));
+    display:flex; align-items:center; justify-content:center; padding:3px;
+  }
+  .avatar-ring .inner{
+    width:100%; height:100%; border-radius:50%; background:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Outfit',sans-serif; font-weight:700; font-size:1.5rem; color:var(--violet);
+  }
+  .profile-card h3{font-size:1.2rem; font-weight:700;}
+  .profile-card .role{color:var(--ink-soft); font-size:0.9rem; margin-top:4px;}
+  .profile-card .loc{color:var(--ink-faint); font-size:0.82rem; margin-top:2px;}
+  .profile-card .quote{
+    margin-top:20px; padding-top:18px; border-top:1px solid rgba(107,70,193,.15);
+    font-family:'Outfit',sans-serif; font-style:italic; font-size:0.95rem; color:var(--violet); font-weight:500;
+  }
+  .chip{
+    position:absolute; z-index:3;
+    background:var(--glass-strong); backdrop-filter:blur(12px);
+    border:1px solid var(--glass-border); border-radius:999px;
+    padding:9px 16px; font-size:0.8rem; font-weight:600; color:var(--ink);
+    box-shadow:0 10px 24px -8px rgba(107,70,193,.25);
+    animation:bob 5s ease-in-out infinite;
+  }
+  .chip.c1{top:-6px; left:-30px; animation-delay:0s; color:var(--violet);}
+  .chip.c2{top:30%; right:-40px; animation-delay:.8s; color:#E0508F;}
+  .chip.c3{bottom:18%; left:-46px; animation-delay:1.6s; color:#2AA37A;}
+  .chip.c4{bottom:-14px; right:-14px; animation-delay:2.4s; color:#2E7DC7;}
+  @keyframes bob{ 0%,100%{transform:translateY(0);} 50%{transform:translateY(-10px);} }
+  @media (prefers-reduced-motion: reduce){ .chip{animation:none;} }
+  @media (max-width:900px){ .chip{display:none;} }
+
+  section{margin-bottom:88px; scroll-margin-top:100px;}
+  .section-head{margin-bottom:28px;}
+  .section-head .eyebrow{font-size:0.8rem; font-weight:600; color:var(--violet); margin-bottom:6px; display:block;}
+  .section-head h2{font-size:1.7rem; font-weight:700;}
+
+  /* glass card base */
+  .glass{
+    background:var(--glass); backdrop-filter:blur(16px);
+    border:1px solid var(--glass-border); border-radius:20px;
+  }
+
+  /* ABOUT */
+  .about-card{padding:36px 40px;}
+  .about-card p{color:var(--ink-soft); font-size:1.03rem; max-width:66ch; margin:0 0 16px;}
+  .about-card p:last-child{margin-bottom:0;}
+  .about-card strong{color:var(--ink); font-weight:600;}
+
+  /* EXPERIENCE */
+  .exp-list{display:flex; flex-direction:column; gap:18px;}
+  .exp-card{padding:28px 32px; position:relative; overflow:hidden;}
+  .exp-card::before{
+    content:''; position:absolute; left:0; top:0; bottom:0; width:5px;
+    background:linear-gradient(180deg, var(--violet), var(--pink));
+  }
+  .exp-top{display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px; margin-bottom:4px;}
+  .exp-when{font-size:0.82rem; color:var(--ink-faint); font-weight:500;}
+  .exp-card h3{font-size:1.18rem; font-weight:700;}
+  .exp-card .org{color:var(--violet); font-size:0.92rem; font-weight:600; margin:2px 0 14px;}
+  .exp-card ul{margin:0; padding-left:18px; color:var(--ink-soft); font-size:0.94rem;}
+  .exp-card li{margin-bottom:8px;}
+  .exp-card li:last-child{margin-bottom:0;}
+  .exp-card li::marker{color:var(--pink);}
+  .badges{margin-top:16px; display:flex; flex-wrap:wrap; gap:8px;}
+  .badge{
+    font-size:0.76rem; font-weight:600; padding:6px 13px; border-radius:999px;
+    background:rgba(167,139,250,.1); color:var(--violet);
+  }
+
+  /* EXPERTISE */
+  .exp-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:18px;}
+  @media (max-width:700px){ .exp-grid{grid-template-columns:1fr;} }
+  .exp-tile{padding:26px; transition:transform .15s ease;}
+  .exp-tile:hover{transform:translateY(-4px);}
+  .exp-tile .ico{
+    width:46px; height:46px; border-radius:14px; display:flex; align-items:center; justify-content:center;
+    font-size:1.3rem; margin-bottom:14px;
+  }
+  .exp-tile.t1 .ico{background:rgba(167,139,250,.15);}
+  .exp-tile.t2 .ico{background:rgba(244,154,194,.18);}
+  .exp-tile.t3 .ico{background:rgba(143,227,194,.2);}
+  .exp-tile.t4 .ico{background:rgba(156,203,255,.2);}
+  .exp-tile h3{font-size:1.04rem; font-weight:700; margin-bottom:8px;}
+  .exp-tile p{color:var(--ink-soft); font-size:0.88rem; margin:0;}
+
+  /* EDUCATION / CERTS */
+  .ed-cert-grid{display:grid; grid-template-columns:1fr 1fr; gap:24px;}
+  @media (max-width:800px){ .ed-cert-grid{grid-template-columns:1fr;} }
+  .ed-card, .cert-card{padding:30px 32px;}
+  .ed-item{margin-bottom:22px; padding-bottom:22px; border-bottom:1px solid rgba(107,70,193,.12);}
+  .ed-item:last-child{border-bottom:none; margin-bottom:0; padding-bottom:0;}
+  .ed-item h3{font-size:1.02rem; font-weight:700;}
+  .ed-item .school{color:var(--violet); font-size:0.86rem; font-weight:600; margin-top:4px;}
+  .ed-item .when{color:var(--ink-faint); font-size:0.78rem; margin-top:4px;}
+  .ed-item .note{color:var(--ink-soft); font-size:0.85rem; margin-top:8px;}
+  .cert-row{display:flex; align-items:center; gap:14px; padding:12px 0; border-bottom:1px solid rgba(107,70,193,.12);}
+  .cert-row:last-child{border-bottom:none;}
+  .cert-ic{width:38px; height:38px; border-radius:12px; background:rgba(167,139,250,.14); display:flex; align-items:center; justify-content:center; font-size:1.05rem; flex:none;}
+  .cert-name{font-size:0.9rem; font-weight:600; color:var(--ink);}
+  .cert-issuer{font-size:0.76rem; color:var(--ink-faint); margin-top:2px;}
+  .cert-date{margin-left:auto; font-size:0.76rem; color:var(--violet); font-weight:600; white-space:nowrap;}
+
+  /* TESTIMONIALS */
+  .chat{display:flex; flex-direction:column; gap:16px; max-width:720px;}
+  .bubble-row{display:flex; gap:12px; align-items:flex-start;}
+  .bubble-row.right{flex-direction:row-reverse;}
+  .avatar{
+    width:36px; height:36px; border-radius:50%; flex:none;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Outfit',sans-serif; font-size:0.78rem; font-weight:700; color:#fff;
+  }
+  .bubble{padding:15px 19px; max-width:480px;}
+  .bubble p{margin:0 0 8px; font-size:0.93rem; color:var(--ink);}
+  .bubble .who{font-size:0.76rem; color:var(--ink-faint); font-weight:500;}
+
+  /* CONTACT */
+  .contact-card{
+    background:linear-gradient(135deg, rgba(167,139,250,.18), rgba(244,154,194,.14));
+    border:1px solid var(--glass-border); border-radius:28px;
+    padding:56px; text-align:center;
+  }
+  .contact-card .eyebrow{font-size:0.82rem; font-weight:600; color:var(--violet); margin-bottom:14px; display:block;}
+  .contact-card h2{font-size:2.1rem; font-weight:700; max-width:22ch; margin:0 auto 26px;}
+  .contact-links{display:flex; justify-content:center; gap:16px; flex-wrap:wrap;}
+
+  footer{text-align:center; padding:34px; font-size:0.82rem; color:var(--ink-faint);}
+
+  a:focus-visible{outline:2px solid var(--violet); outline-offset:3px; border-radius:6px;}
+</style>
+</head>
+<body>
+
+<div class="blob b1"></div>
+<div class="blob b2"></div>
+<div class="blob b3"></div>
+
+<header>
+  <div class="navpill">
+    <div class="logo">Namra Kidwai</div>
+    <nav class="links">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#expertise">Expertise</a>
+      <a href="#education">Education</a>
+      <a href="#testimonials">Reviews</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section class="hero" id="top">
+    <div>
+      <span class="kicker">HR Professional · 4+ Years Experience</span>
+      <h1 class="headline">Building the teams behind India's best <span class="accent">tech companies</span>.</h1>
+      <p class="sub">I run end-to-end IT and non-IT hiring for enterprise clients across India — currently building out ServiceNow teams, alongside cybersecurity, cloud, and DevOps talent pipelines.</p>
+      <div class="hero-ctas">
+        <a class="btn primary" href="#contact">Let's talk →</a>
+        <a class="btn ghost" href="https://www.linkedin.com/in/namra-kidwai/" target="_blank" rel="noopener noreferrer">View LinkedIn</a>
+      </div>
+    </div>
+
+    <div class="profile-wrap">
+      <span class="chip c1">🔐 Cybersecurity</span>
+      <span class="chip c2">⚙️ ServiceNow</span>
+      <span class="chip c3">☁️ Cloud</span>
+      <span class="chip c4">🤝 Client Success</span>
+      <div class="profile-card">
+        <div class="avatar-ring"><div class="inner">NK</div></div>
+        <h3>Namra Kidwai</h3>
+        <div class="role">HR Professional</div>
+        <div class="loc">India</div>
+        <div class="quote">"Precision over volume."</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="section-head"><span class="eyebrow">About</span><h2>A little about how I work</h2></div>
+    <div class="glass about-card">
+      <p>I don't just fill reqs — I build the teams that keep the systems running, patch the CVE, and close the deal. <strong>Four years deep in India IT recruiting</strong>, across cybersecurity, IAM, cloud, DevOps, and — right now — ServiceNow.</p>
+      <p>I'm currently running <strong>client acquisition and recruitment operations</strong> at Fourways Consulting — bringing new enterprise clients on board and building the hiring engine that delivers for them, technical and non-IT hiring alike. I've worked both sides of the table: <strong>in-house corporate recruitment</strong> and <strong>agency recruitment for external clients</strong>, so I know how hiring looks from either seat.</p>
+      <p>In two years at Cambay Healthcare I kept new-hire retention above 85%. Across four years I've recruited into more than ten different technical domains, all within India. My thing is precision over volume: the right candidate, not just an available one.</p>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="section-head"><span class="eyebrow">Experience</span><h2>Where I've built teams</h2></div>
+    <div class="exp-list">
+
+      <div class="glass exp-card">
+        <div class="exp-top"><h3>Recruitment Manager</h3><span class="exp-when">Jul 2025 — Present · 1 yr 3 mos</span></div>
+        <div class="org">Fourways Consulting · India · On-site</div>
+        <ul>
+          <li>Lead a team of recruiters running end-to-end India IT hiring across multiple enterprise clients.</li>
+          <li>Own client accounts, stakeholder management, and business development — onboarding new clients while driving delivery.</li>
+          <li>Run the full recruitment lifecycle: requirement gathering, sourcing, technical screening, offer negotiation, onboarding.</li>
+          <li>Personally interview every shortlisted candidate to lock in quality and client fit before submission.</li>
+          <li>Built and trained the team on Boolean sourcing, candidate assessment, and AI-driven recruitment workflows.</li>
+        </ul>
+        <div class="badges">
+          <span class="badge">SailPoint</span><span class="badge">CyberArk</span><span class="badge">Okta</span><span class="badge">ServiceNow</span><span class="badge">Splunk SOAR</span><span class="badge">Saviynt</span><span class="badge">GCP Security</span>
+        </div>
+      </div>
+
+      <div class="glass exp-card">
+        <div class="exp-top"><h3>Talent Acquisition Executive</h3><span class="exp-when">Jul 2023 — Jun 2025 · 2 yrs</span></div>
+        <div class="org">Cambay Healthcare, LLC · On-site</div>
+        <ul>
+          <li>Ran recruitment for senior and entry-level profiles across Vadodara, Noida, and Aligarh.</li>
+          <li>Sole point of contact for Aligarh Muslim University campus recruitment — built the relationship from scratch.</li>
+          <li>Led a campus recruitment event that pulled in a strong share of high-potential fresh-grad hires.</li>
+          <li>Hit an 85%+ retention rate for new recruits — most still thriving in the org today.</li>
+          <li>Owned employer branding online and on-campus alongside full-cycle recruitment.</li>
+        </ul>
+        <div class="badges">
+          <span class="badge">Talent Acquisition</span><span class="badge">Campus Recruitment</span><span class="badge">Employer Branding</span>
+        </div>
+      </div>
+
+      <div class="glass exp-card">
+        <div class="exp-top"><h3>Human Resource Specialist</h3><span class="exp-when">Jun 2022 — Mar 2023 · 10 mos</span></div>
+        <div class="org">International Institute of SDG's and Public Policy Research · Delhi · Part-time</div>
+        <ul>
+          <li>Helped recruit and screen candidates through tests and interviews.</li>
+          <li>Managed the candidate database and scheduled follow-up and group interviews via Google Sheets.</li>
+        </ul>
+        <div class="badges">
+          <span class="badge">Problem Solving</span><span class="badge">Onboarding</span>
+        </div>
+      </div>
+
+      <div class="glass exp-card">
+        <div class="exp-top"><h3>Event Management Intern</h3><span class="exp-when">Sep 2020 — Dec 2020 · 4 mos</span></div>
+        <div class="org">Youth Empowerment Foundation · New Delhi · Internship</div>
+        <ul>
+          <li>Coordinated seminar logistics end-to-end — site, scheduling, marketing, materials.</li>
+          <li>Handled event admin: contracts, fee collection, booking, promotion, and status reporting.</li>
+        </ul>
+        <div class="badges">
+          <span class="badge">Event Planning</span><span class="badge">Fundraising</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="expertise">
+    <div class="section-head"><span class="eyebrow">Expertise</span><h2>What I bring to the table</h2></div>
+    <div class="exp-grid">
+      <div class="glass exp-tile t1">
+        <div class="ico">🎯</div>
+        <h3>Deep tech hiring</h3>
+        <p>End-to-end IT hiring across cybersecurity, IAM, cloud, infrastructure, mainframe, DevOps, and data engineering.</p>
+      </div>
+      <div class="glass exp-tile t2">
+        <div class="ico">🤝</div>
+        <h3>In-house &amp; client-side recruitment</h3>
+        <p>Experience on both sides — corporate in-house hiring and agency recruitment for external clients — plus the client acquisition and account management to keep that pipeline healthy.</p>
+      </div>
+      <div class="glass exp-tile t3">
+        <div class="ico">🌱</div>
+        <h3>Team leadership</h3>
+        <p>Building and training recruiter teams on sourcing methodology, candidate assessment, and AI-driven workflows.</p>
+      </div>
+      <div class="glass exp-tile t4">
+        <div class="ico">🎓</div>
+        <h3>Campus &amp; volume hiring</h3>
+        <p>Running large-scale campus drives and university partnerships, backed by a strong new-hire retention track record.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="section-head"><span class="eyebrow">Education &amp; certifications</span><h2>Background &amp; credentials</h2></div>
+    <div class="ed-cert-grid">
+      <div class="glass ed-card">
+        <div class="ed-item">
+          <h3>Master of Business Administration, Marketing</h3>
+          <div class="school">Aligarh Muslim University</div>
+          <div class="when">May 2025 – Jul 2027 · First Division</div>
+        </div>
+        <div class="ed-item">
+          <h3>Master of Arts, Linguistics</h3>
+          <div class="school">Aligarh Muslim University</div>
+          <div class="when">Jan 2021 – Jun 2023 · First Division</div>
+          <div class="note">Dissertation: Phonological and Grammatical Analysis of Mymensinghi Dialect. Focus: syntax, stylistics, psycholinguistics, neurolinguistics.</div>
+        </div>
+        <div class="ed-item">
+          <h3>Bachelor of Arts, Linguistics</h3>
+          <div class="school">Aligarh Muslim University</div>
+          <div class="when">2018 – 2021 · First Division</div>
+        </div>
+      </div>
+      <div class="glass cert-card">
+        <div class="cert-row">
+          <div class="cert-ic">🏆</div>
+          <div><div class="cert-name">Excel with LinkedIn Recruiter — Pro Services &amp; Talent Insights</div><div class="cert-issuer">LinkedIn</div></div>
+          <div class="cert-date">Jun 2025</div>
+        </div>
+        <div class="cert-row">
+          <div class="cert-ic">🎯</div>
+          <div><div class="cert-name">LinkedIn Recruiter</div><div class="cert-issuer">LinkedIn</div></div>
+          <div class="cert-date">Feb 2025</div>
+        </div>
+        <div class="cert-row">
+          <div class="cert-ic">📈</div>
+          <div><div class="cert-name">Talent Management</div><div class="cert-issuer">Great Learning</div></div>
+          <div class="cert-date">Oct 2024</div>
+        </div>
+        <div class="cert-row">
+          <div class="cert-ic">⚡</div>
+          <div><div class="cert-name">Naukri Maestro Recruiter</div><div class="cert-issuer">Naukri.com</div></div>
+          <div class="cert-date">Oct 2024</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="testimonials">
+    <div class="section-head"><span class="eyebrow">Reviews</span><h2>What colleagues say</h2></div>
+    <div class="chat">
+      <div class="bubble-row">
+        <div class="avatar" style="background:var(--violet);">NI</div>
+        <div class="glass bubble">
+          <p>"Working with Namra has been an absolute pleasure — she transforms the hiring process into something truly impactful. She doesn't just fill positions, she builds relationships that last."</p>
+          <div class="who">Nazre Imam — SEO &amp; Growth Consultant, same team</div>
+        </div>
+      </div>
+      <div class="bubble-row right">
+        <div class="avatar" style="background:#E0508F;">MK</div>
+        <div class="glass bubble">
+          <p>"Namra possesses a good understanding of talent scouting, ensuring we attract the most suitable candidates. She makes both candidates and colleagues feel valued."</p>
+          <div class="who">Mubasheir Khan — Senior HR Executive</div>
+        </div>
+      </div>
+      <div class="bubble-row">
+        <div class="avatar" style="background:#2AA37A;">NA</div>
+        <div class="glass bubble">
+          <p>"I was consistently impressed by her exceptional motivation, dedication, and positive impact on our team and projects. A real asset."</p>
+          <div class="who">Nadeem Ahmad — AVP Finance, Cambay Healthcare</div>
+        </div>
+      </div>
+      <div class="bubble-row right">
+        <div class="avatar" style="background:#2E7DC7;">JR</div>
+        <div class="glass bubble">
+          <p>"Namra consistently demonstrated intelligence, sharp problem-solving skills, and a remarkable ability to approach challenges with creativity and clarity."</p>
+          <div class="who">Jeff Rogers — CEO &amp; Founder, P3SG</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="contact-card">
+      <span class="eyebrow">Get in touch</span>
+      <h2>Let's talk about your next hire — or mine.</h2>
+      <div class="contact-links">
+        <a class="btn primary" href="https://www.linkedin.com/in/namra-kidwai/" target="_blank" rel="noopener noreferrer">Message on LinkedIn →</a>
+        <a class="btn ghost" href="mailto:namra.kidwai.nk@gmail.com">namra.kidwai.nk@gmail.com</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>Namra Kidwai · HR Professional, India Recruitment &amp; Talent Acquisition</footer>
+
+</body>
+</html>
